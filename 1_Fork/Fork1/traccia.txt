@@ -1,0 +1,39 @@
+Traccia
+
+Scrivi un programma in C che:
+1.	Crea 3 processi figli usando fork() (in un ciclo).
+2.	Ogni figlio:
+	•	Genera un numero casuale tra 1 e 100
+	•	Stampa il proprio PID e il numero generato
+	•	Termina restituendo quel numero come codice di uscita
+3.	Il padre:
+	•	Attende uno alla volta la terminazione dei figli (usa wait())
+	•	Per ogni figlio terminato:
+	•	Stampa il PID del figlio
+	•	Verifica se è terminato correttamente
+	•	Recupera e stampa il numero generato (usando WEXITSTATUS)
+4.	Alla fine il padre stampa:
+	•	La somma dei numeri restituiti dai 3 figli.
+
+⚠️ Nota: il valore restituito da exit() può essere massimo 255 (per motivi tecnici), quindi il figlio può restituire al massimo un numero compreso tra 0 e 255. Per questo ti faccio generare numeri tra 1 e 100.
+
+⸻
+
+🧠 Requisiti tecnici
+	•	Usa fork() in un ciclo
+	•	Usa srand(time(NULL) + getpid()) per evitare numeri casuali uguali tra figli
+	•	Usa exit(numero) nel figlio
+	•	Usa wait() nel padre e macro come WIFEXITED, WEXITSTATUS
+
+⸻
+
+✨ Esempio output atteso
+[Figlio PID=12345] Numero generato: 17
+[Figlio PID=12346] Numero generato: 52
+[Figlio PID=12347] Numero generato: 39
+
+[Padre] Figlio 12347 terminato con codice: 39
+[Padre] Figlio 12346 terminato con codice: 52
+[Padre] Figlio 12345 terminato con codice: 17
+
+[Padre] Somma totale dei risultati: 108
